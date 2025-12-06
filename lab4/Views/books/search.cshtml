@@ -1,0 +1,81 @@
+﻿@model IEnumerable<lab4.Models.book>
+
+
+
+<form asp-action="Search">
+    <div class="form-group">
+
+        <input name="s" class="form-control" />
+    </div>
+    <input type="submit" value="Search" class="btn btn-default" />
+</form>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.info)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pubdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bookquantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imgfile)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.info)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pubdate)
+            </td>
+            <td>
+
+                @foreach (mycata cat in ViewBag.Catag )
+                if (item.category == cat.Id) @cat.category
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bookquantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.imgfile)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
